@@ -1,6 +1,5 @@
 # Main Kubernetes Components
 
----
 ## Pod
 
 - Pod: It is the smallest unit in K8s.

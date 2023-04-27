@@ -166,3 +166,7 @@ And a`StatefulSet` is used for ```stateFUL``` Apps or Databases.
 >**Warning**: Deploying Databases using StatefulSet in K8s Cluster, can be some what tidious (`Not an easy task`) and `can be more dificult that working with Deployment`.
 
 - That is why it is also a `common practice to host a Database outside a K8s cluster`, and just having Stateless applications in K8s Cluster that replicates and scales with no problem inside K8s Cluster and communicate with and External Database.
+
+---
+
+# K8s ARCHITECTURE

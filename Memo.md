@@ -82,6 +82,8 @@ In Kubernetes wi just connect it [ConfigMap] to the Pod, so that the Pod gets th
 
 - For this purpose, kubernetes has another component called `Secret`.
 
+---
+
 ### Secret
 
 Secret Is like ConfigMap, the only difference is that `it is used to store secret data`, Like credetials, Certificates and other things you do not want other people to have access to. And it is not stored in plain text format of course!. but in `base64 encoded ` format.

@@ -1,10 +1,9 @@
 # Main Kubernetes Components
 
 ---
-s
 ## Pod
 
-- Pod: It is the smallest unity in K8s.
+- Pod: It is the smallest unit in K8s.
 
 - It is an abstraction over container. It creates a running environment or a layer on top of the container. 
 

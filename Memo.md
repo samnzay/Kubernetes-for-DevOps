@@ -118,7 +118,8 @@ That Storage could be on a ```local``` machine [`On same server Node Where the P
 
 - Now when our Database container or Pod get restarted, all the Data will bethere, persisted.
 
-->**Note** : Think the Storage as an external hard drive plugged in into a kubernetes Cluster. Because K8s Cluster does not explicitily manage Data persistance.
+>**Note** : 
+    Think the Storage as an external hard drive plugged in into a kubernetes Cluster. Because K8s Cluster does not explicitily manage Data persistance.
 
 - It means that, you as a user or administarator ```you are responsible``` for `backing up the data`, `replicating` and managing it and making sure it is kept on proper hardware etc.
 
@@ -139,7 +140,8 @@ And that component of K8s or the Blueprints is called `Deployment`.
 
 ### Deployment
 
-->**Note** : In practice you will not be working with or creating pods. `You will be creating Deployments`, because there you can specify how many replicas, you can also `scale up` or `down` the number of replicas of pods that you need.
+>**Note** : 
+    In practice you will not be working with or creating pods. `You will be creating Deployments`, because there you can specify how many replicas, you can also `scale up` or `down` the number of replicas of pods that you need.
 
 - Deployment `is another layer of abstraction of Pods`, which makes it more convenient to interact with pods, replicate them, and do some other configuration.
 

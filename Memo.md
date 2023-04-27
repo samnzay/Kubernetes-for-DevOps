@@ -78,8 +78,7 @@ In Kubernetes wi just connect it [ConfigMap] to the Pod, so that the Pod gets th
 
 - Part of the External configurtions can be Database ```Username``` and ```password``` , which may also change in the application deployment Process. But:
 
-**Warning** 
-    `Don't put Credentials into ConfigMap`. especially in plain text. `it is insecure` even though they are part of external configuration.
+>**Warning** : `Don't put` Credentials into ConfigMap. especially in plain text. `it is insecure` even though they are part of external configuration.
 
 - For this purpose, kubernetes has another component called `Secret`.
 
@@ -92,5 +91,4 @@ Secret Is like ConfigMap, the only difference is that `it is used to store secre
 
 - The Built-in Security mechanism in kubernetes is not enabled by default.
 
-**Note** 
-    You can use the Secret component as environmrnt variable or as a Properties file.
+>**Note** : You can use the Secret component as environmrnt variable or as a Properties file.

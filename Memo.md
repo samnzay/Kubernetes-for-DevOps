@@ -76,3 +76,19 @@ In Kubernetes wi just connect it [ConfigMap] to the Pod, so that the Pod gets th
 
 - Now, If we change the DB_URL, we just adjust the ConfigMap. we do not need to rebuild and go through the whole cycle.
 
+- Part of the External configurtions can be Database ```Username``` and ```password``` , which may also change in the application deployment Process. But:
+
+**Warning** : Dont put Credentials into ConfigMap. especially in plain text. `it is insecure` even though they are part of external configuration.
+
+- For this purpose, kubernetes has another component called `Secret`.
+
+### Secret
+
+Secret Is like ConfigMap, the only difference is that `it is used to store secret data`, Like credetials, Certificates and other things you do not want other people to have access to. And it is not stored in plain text format of course!. but in `base64 encoded ` format.
+    
+    Eg: DB_USER = username
+        DB_PASSWORD = pwd
+
+- The Built-in Security mechanism in kubernetes is not enabled by default.
+
+**Note** : You can use the Secret component as environmrnt variable or as a Properties file.

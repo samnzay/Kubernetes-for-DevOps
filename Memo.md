@@ -23,6 +23,8 @@ This is where anonther component comes into rescue! that component is `Service`.
 
 ## Service and Ingress
 
+### Service
+
 - Service is a `Static` or `permanent IP address` that can be attached to each Pod.
 
 - Eg: `MyApp` and `MyDatabase`pods, each will have its own service.
@@ -50,7 +52,7 @@ Eg: ```http://myapp-service-ip:port```.
 
 - This method is only good when we want to test something very fast, but not for the Final Product.
 
-- Instead, we want our app to be accessed with a `Secure Protocol` with a `Domain name`.
+- Instead, we want our app to be accessed with a `Secure Protocol` with a `Domain Name`.
     
     Eg: https://my-app.rw
 
@@ -96,3 +98,23 @@ Secret Is like ConfigMap, the only difference is that `it is used to store secre
 - The Built-in Security mechanism in kubernetes is not enabled by default.
 
 >**Note** : You can use the Secret component as environmrnt variable or as a Properties file.
+
+---
+
+## Volumes
+
+### Data Storage
+
+Let's say our `database` Pod our application uses, has or generates some data. `If the Database Container or the pod get restarted`, ```the Data is gone!```. That is problematic and inconvenient, obviously because you want you data or logs to be persisted reliably long term. The way you can do it in Kubernetes is using another component called `Volumes`.
+
+
+How It works, `it basically attaches a physical storage on a hard drive to your pod`.
+
+That Storage could be on a ```local``` machine [`On same server Node Where the Pod is running`], or could be on `remote` storage [`Outside the K8s cluster`] it means that it Could be ``Cloud Storage`` or your ``On-Premises Storage`` which is not part of the K8s Cluster. You just have an external reference on it.
+
+- Now when our Database container or Pod get restarted, all the Data will bethere, persisted.
+
+->**Note** :
+- Think the Storage as an external hard drive plugged in into a kubernetes Cluster. Because K8s Cluster does not explicitily manage Data persistance.
+
+- It means that, you as a user or administarator ```you are responsible``` for `backing up the data`, `replicating` and managing it and making sure it is kept on proper hardware etc...

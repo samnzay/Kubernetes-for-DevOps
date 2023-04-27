@@ -1,5 +1,7 @@
 # Main Kubernetes Components
 
+---
+s
 ## Pod
 
 - Pod: It is the smallest unity in K8s.
@@ -18,6 +20,8 @@ You only interact with the kubernetes Layer.
 - In this case, a new Pod will be re-created and assigned  a new IP address. This brings difficulties to maintain communication among pods, when a pod restarts. It is not reliable.
 
 This is where anonther component comes into rescue! that component is `Service`.
+
+---
 
 ## Service and Ingress
 
@@ -55,6 +59,8 @@ Eg: ```http://myapp-service-ip:port```.
 - This is where onother service called `Ingress` comes into rescue!
 - The ```Request goes first to Ingress``` and ```ingress does the forwarding```, then to the Service.
 
+---
+
 ## ConfigMap and Secret
 
 Usually Pods communicate each other using a Service.
@@ -81,8 +87,6 @@ In Kubernetes wi just connect it [ConfigMap] to the Pod, so that the Pod gets th
 >**Warning** : `Don't put` Credentials into ConfigMap. especially in plain text. `it is insecure` even though they are part of external configuration.
 
 - For this purpose, kubernetes has another component called `Secret`.
-
----
 
 ### Secret
 

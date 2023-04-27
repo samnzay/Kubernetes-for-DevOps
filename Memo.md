@@ -27,11 +27,15 @@ This is where anonther component comes into rescue! that component is `Service`.
 
 - Service is a `Static` or `permanent IP address` that can be attached to each Pod.
 
-- Eg: `MyApp` and `MyDatabase`pods, each will have its own service.
+ ->**Note**:
+- A Service is also a `Loadbalancer`. This means that it catch the requests and forward t it to the least busy pod.
+
+- Eg: `my-app` and `my-database`pods, each will have its own service.
 
 - `Good News Here!`. Lifecycle of Pod and Service are not connected! Even if the Pod dies, the Service and its IP will stay. You do not have to change that endpoint anymore!
 
 - Pods now are able to Communicate each other through `Service`.
+
 
 ### Ingress
 
@@ -115,6 +119,32 @@ That Storage could be on a ```local``` machine [`On same server Node Where the P
 - Now when our Database container or Pod get restarted, all the Data will bethere, persisted.
 
 ->**Note** :
-- Think the Storage as an external hard drive plugged in into a kubernetes Cluster. Because K8s Cluster does not explicitily manage Data persistance.
+    - Think the Storage as an external hard drive plugged in into a kubernetes Cluster. Because K8s Cluster does not explicitily manage Data persistance.
 
-- It means that, you as a user or administarator ```you are responsible``` for `backing up the data`, `replicating` and managing it and making sure it is kept on proper hardware etc...
+- It means that, you as a user or administarator ```you are responsible``` for `backing up the data`, `replicating` and managing it and making sure it is kept on proper hardware etc.
+
+---
+## Deployment and Stateful Set
+
+Let's say our application pod dies, crashes and the user is no longer accessing our app through browser. Here is a downtime.
+
+But in Distributed systems, we do not rely on one application pod. `We Replicate everything`.
+
+This means that we have another `Node` where a `replica` or `clone` of our app would run, and will also be ```connected to the same service```.
+
+Remember that, a `Service` is also a `Loadbalancer`. This means that it catches the requests and forward t it to the least busy pod.
+
+In order to create a second replica of my-app Pod, you wouldn't create a second pod. But instead you would define `blueprints for pods`, and ```specify how many replicas of that Pod``` you would like to run.
+
+And that component of K8s or the Blueprints is called `Deployment`. 
+
+### Deployment
+
+->**Note** :
+    In practice you will not be working with or creating pods. `You will be creating Deployments`, because there you can specify how many replicas, you can also `scale up` or `down` the number of replicas of pods that you need.
+
+- Deployment `is another layer of abstraction of Pods`, which makes it more convenient to interact with pods, replicate them, and do some other configuration.
+
+- In Practice, you will mostly work with Deployment not with Pods.
+
+- Now If one of replicas of your application will die, the `service will forward the requests to onother one`. The application will still be accessible from the user.

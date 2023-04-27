@@ -27,7 +27,7 @@ This is where anonther component comes into rescue! that component is `Service`.
 
 - Service is a `Static` or `permanent IP address` that can be attached to each Pod.
 
- >**Note**: A Service is also a `Loadbalancer`. This means that it catch the requests and forward t it to the least busy pod.
+ >**Note**: A Service is also a `Loadbalancer`. This means that it catches the requests and forward it to the least busy pod.
 
 - Eg: `my-app` and `my-database`pods, each will have its own service.
 
@@ -115,7 +115,7 @@ How It works, `it basically attaches a physical storage on a hard drive to your 
 
 That Storage could be on a ```local``` machine [`On same server Node Where the Pod is running`], or could be on `remote` storage [`Outside the K8s cluster`] it means that it Could be ``Cloud Storage`` or your ``On-Premises Storage`` which is not part of the K8s Cluster. You just have an external reference on it.
 
-- Now when our Database container or Pod get restarted, all the Data will bethere, persisted.
+- Now, when our Database container or Pod get restarted, all the Data will be there, persisted.
 
 >**Note** : 
     Think the Storage as an external hard drive plugged in into a kubernetes Cluster. Because K8s Cluster does not explicitily manage Data persistance.
@@ -147,3 +147,23 @@ And that component of K8s or the Blueprints is called `Deployment`.
 - In Practice, you will mostly work with Deployment not with Pods.
 
 - Now, If one of replicas of your application will die, the `service will forward the requests to onother one`. The application will still be accessible from the user.
+
+>**Warning**:
+ `We can't replicate Database using a Deployment`! and the reason for that is that, ```Database has a State```, which is it's `data`.
+
+ Meaning that, If we have replicas or clones of the database, they would all need to access shared data storage, and there ```you would need some kind of mechanism that manages``` which Pods are currently `writting to` that storage, or which Pods are `reading` to that storage, `to Avoid Data Inconsistences`.
+
+- And that Mechanism in addition to the replicating feature, is offered by another K8s component called `StatefulSet`.
+
+- This component is `meant for applications like Databases`(STATEFUL apps), like MongoDB, MySQL, Elastic Search, Prostgresql and more
+
+>**Note** :
+`Deployment` is used for ```stateLESS``` Apps.
+
+`StatefulSet` is used for ```stateFUL``` Apps or Databases.
+
+- StatefulSet will take care of replicating the Pods, scaling them up or down, `but making sure that the Database reads and writes are Synchronized`, so that no database inconsistencies are offered.
+
+>**Warning**: Deploying Databases using StatefulSet in K8s Cluster, can be some what tidious (`Not an easy task`) and `can be more dificult that working with Deployment`.
+
+- That is why it is also a `common practice to host a Database outside a K8s cluster`, and just having Stateless applications in K8s Cluster that replicates and scales with no problem inside K8s Cluster and communicate with and External Database.

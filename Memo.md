@@ -27,8 +27,7 @@ This is where anonther component comes into rescue! that component is `Service`.
 
 - Service is a `Static` or `permanent IP address` that can be attached to each Pod.
 
- >**Note**:
-- A Service is also a `Loadbalancer`. This means that it catch the requests and forward t it to the least busy pod.
+ >**Note**: A Service is also a `Loadbalancer`. This means that it catch the requests and forward t it to the least busy pod.
 
 - Eg: `my-app` and `my-database`pods, each will have its own service.
 

@@ -27,7 +27,7 @@ This is where anonther component comes into rescue! that component is `Service`.
 
 - Service is a `Static` or `permanent IP address` that can be attached to each Pod.
 
- ->**Note**:
+ >**Note**:
 - A Service is also a `Loadbalancer`. This means that it catch the requests and forward t it to the least busy pod.
 
 - Eg: `my-app` and `my-database`pods, each will have its own service.
@@ -147,4 +147,4 @@ And that component of K8s or the Blueprints is called `Deployment`.
 
 - In Practice, you will mostly work with Deployment not with Pods.
 
-- Now If one of replicas of your application will die, the `service will forward the requests to onother one`. The application will still be accessible from the user.
+- Now, If one of replicas of your application will die, the `service will forward the requests to onother one`. The application will still be accessible from the user.

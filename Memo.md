@@ -1,4 +1,4 @@
-# Main Kubernetes Components
+# MAIN KUBERNETES COMPONENTS
 
 ## Pod
 
@@ -169,4 +169,4 @@ And a`StatefulSet` is used for ```stateFUL``` Apps or Databases.
 
 ---
 
-# K8s ARCHITECTURE
+# KUBERNETES ARCHITECTURE

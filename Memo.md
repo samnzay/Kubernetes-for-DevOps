@@ -1,7 +1,7 @@
 ## Pod
 
-Pod: It is the smallest unity in K8s.
-===
+- Pod: It is the smallest unity in K8s.
+
 - It is an abstraction over container. It creates a running environment or a layer on top of the container. 
 
 - It abstract the container so that we can replace them if we want to, and we do not want to work directly with docker or other container technology.
@@ -52,3 +52,25 @@ Eg: ```http://myapp-service-ip:port```.
 
 - This is where onother service called `Ingress` comes into rescue!
 - The ```Request goes first to Ingress``` and ```ingress does the forwarding```, then to the Service.
+
+## ConfigMap and Secret
+
+Usually Pods communicate each other using a Service.
+Eg. `my-app` and `Database`. th database will have and endpoint used to communicate with it. eg: ```mongo-db-service```.
+
+- But where do we configure this url or endpoint? usually you will configure into environmental variable of `my-app`. Database URL usually in the `built` application.
+
+- When the URL of Database changes, eg: from ```mongo-db-service``` to ```mongo-db```, we will have to adjust it in our application that is ```my-app```.
+
+- We will have to `Re-build ` our new image, `->` `push into Image repository` `->` and `pull it into our pod`. and then restart the whole thing.
+
+- `Good News here!`. This is where a Kubernetes component called ConfigMap comes into rescue!
+
+### ConfigMap
+
+It is basically our `external configurations` to our Application. It will usually contain data like ```URL``` of database for our app or some other services that we use.
+
+In Kubernetes wi just connect it [ConfigMap] to the Pod, so that the Pod gets the data that the ConfigMap contains.
+
+- Now, If we change the DB_URL, we just adjust the ConfigMap. we do not need to rebuild and go through the whole cycle.
+

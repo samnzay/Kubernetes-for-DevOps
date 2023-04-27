@@ -158,9 +158,8 @@ And that component of K8s or the Blueprints is called `Deployment`.
 - This component is `meant for applications like Databases`(STATEFUL apps), like MongoDB, MySQL, Elastic Search, Prostgresql and more
 
 >**Note** :
-`Deployment` is used for ```stateLESS``` Apps.
-
-`StatefulSet` is used for ```stateFUL``` Apps or Databases.
+A `Deployment` is used for ```stateLESS``` Apps.
+And a`StatefulSet` is used for ```stateFUL``` Apps or Databases.
 
 - StatefulSet will take care of replicating the Pods, scaling them up or down, `but making sure that the Database reads and writes are Synchronized`, so that no database inconsistencies are offered.
 

@@ -13,7 +13,7 @@ You only interact with the kubernetes Layer.
 - Pod is meant to run one application container inside of it. Only in special case you have main service and helper services have to run inside the same "Pod".
 
 - Each Pod gets Its own IP Adrress [`Internal IP`].
-- Pods can communicate each other using their `Internal IP Adresses`. However Pods components in Kubernetes are `Ephemeral`! (`They can die very easily form may reasons`).
+- Pods can communicate each other using their `Internal IP Adresses`. However Pods components in Kubernetes are `Ephemeral`! (`They can die very easily from many reasons`).
 
 - In this case, a new Pod will be re-created and assigned  a new IP address. This brings difficulties to maintain communication among pods, when a pod restarts. It is not reliable.
 

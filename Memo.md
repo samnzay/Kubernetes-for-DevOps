@@ -191,7 +191,7 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
 
  - So, because applications `Pods have containers running inside`, the `Container Runtime` needs to be installed on every node. 
  
- But, the process that actually schedules those pods and the containers in underneath is `Kubelet`. Which is a process of Kubernetes itself unlike Container runtime that has interface with both container runtime and the machine (```The Node itself```), Because at the end of the day Kubelet is responsible for taking that configuration and actually running or starting a Pod with a container inside, and then assigning resources fromthe Node to the container like CPU RAM and storage resources.
+ - But, the process that actually schedules those pods and the containers in underneath is `Kubelet`. Which is a process of Kubernetes itself unlike Container runtime that has interface with both container runtime and the machine (```The Node itself```), Because at the end of the day Kubelet is responsible for taking that configuration and actually running or starting a Pod with a container inside, and then assigning resources fromthe Node to the container like CPU RAM and storage resources.
 
  >**Note** : Kubelet ```interacts with both``` the container and Node. And Kubelet `starts the Pod` with a container inside.
 

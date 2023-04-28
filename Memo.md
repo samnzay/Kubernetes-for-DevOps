@@ -254,7 +254,7 @@ So Master Servers (Nodes) have completely different processes running inside. An
 
  - So, first it will look at your request and see, how much resources the application you want to schedule will need, how much CPU , how much RAM, and then it's gonna go through the Worker Node and se the available resources on each one of them.
 
- And if it sees that `one Node is least busy` and `has most resources available`, It will schedule a new pod on that Node.
+ - And if it sees that `one Node is least busy` and `has most resources available`, It will schedule a new pod on that Node.
 
  >**Note**: Scheduler `just decides` on which Node a new Pod should be scheduled. The process that actually does scheduling that actually starts that Pod with a container, is the `Kubelet`. Kubelet gets the request from the Scheduler and execute the request on that Node.
 

@@ -163,7 +163,7 @@ And a`StatefulSet` is used for ```stateFUL``` Apps or Databases.
 
 - StatefulSet will take care of replicating the Pods, scaling them up or down, `but making sure that the Database reads and writes are Synchronized`, so that no database inconsistencies are offered.
 
->**Warning**: Deploying Databases using StatefulSet in K8s Cluster, can be some what tidious (`Not an easy task`) and `can be more dificult that working with Deployment`.
+>**Warning**: Deploying Databases using StatefulSet in K8s Cluster, can be some what tidious (`Not an easy task`) and `can be more dificult than working with Deployment`.
 
 - That is why it is also a `common practice to host a Database outside a K8s cluster`, and just having Stateless applications in K8s Cluster that replicates and scales with no problem inside K8s Cluster and communicate with and External Database.
 
@@ -175,9 +175,9 @@ And a`StatefulSet` is used for ```stateFUL``` Apps or Databases.
 
 We are going to explain how kubernetes does what it does, `how` K8s Cluster is `Self-managed`, `self-healing`, and `Automated` and How you as Operator of the kubernetes cluster, should endup having much `less manual effort`.
 
-## Worker Machine (Node) in K8s Cluster
+### Worker Machine (Node) in K8s Cluster
 
-### Node processes
+#### Node processes
 
  Let's assume a basic setup of one Node with 2 applications pods running on it. One of the main components of the K8s's achitecture, are its `Worker Servers` or `Nodes`.
 
@@ -227,15 +227,15 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
 **The Answer is**: All these Managing processes are done by `Master Nodes`.
 
 
-## Master Node
+### Master Node
 
-### Master Processes
+#### Master Processes
 
 So Master Servers (Nodes) have completely different processes running inside. And these are 4 Processes that run on every Master Node that `control the Cluster state` and the `Worker Nodes` as well.
 
 - The `1st` Service is the `API Server`. So When you as a user want to deploy a new application in the K8s Cluster, you interact with the API Server using some Client. It could be UI of K8s Dashboard, CLI tool like kubelet or a Kubernetes API.
 
->**Note**: `API Server` is like a *`Cluster Gateway`* Which gets the initial request of any update into the cluster or even the queries from the Cluster. It also act as a *`Gate Keeper`* for the Authentication,to make sure that only the authenticated and authorized requests get through the Cluster.
+>**Note**: `API Server` is like a *`Cluster Gateway`*, Which gets the initial request of any update into the cluster or even the queries from the Cluster. It also act as a *`Gate Keeper`* for the Authentication,to make sure that only the authenticated and authorized requests get through the Cluster.
 
 - That Means that whenever you want to schedule new Pods, deploy new application, Create new service, you have to `talk to` the ```API Server``` on a Master Node.The API Server `validate your request` and everying is fine, then it forwards your request to other processes in order to schedule the Pod or create other component you requested.
 

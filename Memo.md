@@ -187,10 +187,14 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
 
  - So, `Nodes` are `Cluster Servers` that actually do the work. That is why some times they are called `Worker Nodes`.
 
- - The `first process` that need to run on every node, is the `Container Runtime`. Like Docker, but it could be other container technology as well.
+ #### 1. Container Runtime
+
+ - The `1st process` that need to run on every node, is the `Container Runtime`. Like Docker, but it could be other container technology as well.
 
  - So, because applications `Pods have containers running inside`, the `Container Runtime` needs to be installed on every node. 
  
+ #### 2. Kubelet
+
  - But, the process (```2nd process```) that actually schedules those pods and the containers in underneath is `Kubelet`. Which is a process of Kubernetes itself unlike Container runtime that has interface with both container runtime and the machine (```The Node itself```), Because at the end of the day Kubelet is responsible for taking that configuration and actually running or starting a Pod with a container inside, and then assigning resources fromthe Node to the container like CPU RAM and storage resources.
 
  >**Note** : Kubelet ```interacts with both``` the container and Node. And Kubelet `starts the Pod` with a container inside.
@@ -199,6 +203,8 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
  - So, usually kubernetes `Cluster is made up of multiple Nodes`, which also must have container runtime and kubelet services installed. And you can have hundreds of those `Worker Nodes` which will run other Pods and containers and replicas of the existing pods like my-app and database pods in this example.
 
  - And the way `communication between them` works , is using `Services`, which is a sort of a load balancer that basically catches the request, direct it to the Pod of the application, like Database for example and then forwards it to the respective Pod.
+
+#### 3. Kube Proxy
 
 - And the `3rd Process` that is responsible for ```forwarding requests from Services to Pods```, is actually `Kube Proxy`. And also must be installed on every Node. Kube-Proxy has an intelligent forwarding logic inside tha makes sure that the communication also works in a performant way with low overhead.
 
@@ -233,7 +239,7 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
 
 So Master Servers (Nodes) have completely different processes running inside. And these are 4 Processes that run on every Master Node that `control the Cluster state` and the `Worker Nodes` as well.
 
-#### API Server
+#### 1. API Server
 
 - The `1st` Service is the `API Server`. So When you as a user want to deploy a new application in the K8s Cluster, you interact with the API Server using some Client. It could be UI of K8s Dashboard, CLI tool like kubelet or a Kubernetes API.
 
@@ -247,7 +253,7 @@ So Master Servers (Nodes) have completely different processes running inside. An
 
 - Another Master Process is `Scheduler`.
 
-#### Scheduler
+#### 2. Scheduler
  As Mentioned above, if you send an API Server a request to schedule a new Pod, `API Server after it validates your request`, `it will actually hand it over to the Scheduler` in order to start a new application Pod on one of the Worker Nodes.
 
  - And of course instead of randomly assigning to any Node, Scheduler has this whole intelligent on deciding on which specific Worker Node the next Node will be scheduled.
@@ -259,3 +265,5 @@ So Master Servers (Nodes) have completely different processes running inside. An
  >**Note**: Scheduler `just decides` on which Node a new Pod should be scheduled. The process that actually does scheduling that actually starts that Pod with a container, is the `Kubelet`. Kubelet gets the request from the Scheduler and execute the request on that Node.
 
  - Another crutial component is the `Controller Manager`.
+
+ #### 3. Controller Manager

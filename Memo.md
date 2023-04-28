@@ -233,6 +233,8 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
 
 So Master Servers (Nodes) have completely different processes running inside. And these are 4 Processes that run on every Master Node that `control the Cluster state` and the `Worker Nodes` as well.
 
+##### API Server
+
 - The `1st` Service is the `API Server`. So When you as a user want to deploy a new application in the K8s Cluster, you interact with the API Server using some Client. It could be UI of K8s Dashboard, CLI tool like kubelet or a Kubernetes API.
 
 >**Note**: `API Server` is like a *`Cluster Gateway`*, Which gets the initial request of any update into the cluster or even the queries from the Cluster. It also act as a *`Gate Keeper`* for the Authentication,to make sure that only the authenticated and authorized requests get through the Cluster.
@@ -242,3 +244,18 @@ So Master Servers (Nodes) have completely different processes running inside. An
 - Also if you want to `Query` status of your deployment, Cluster health, etc.., you make the request to the API Server and it gives you the response.
 
 - Which `is good for security`, because `you have only one entrypoint` into the cluster.
+
+- Another Master Process is `Scheduler`.
+
+##### Scheduler
+ As Mentioned above, if you send an API Server a request to schedule a new Pod, `API Server after it validates your request`, `it will actually hand it over to the Scheduler` in order to start a new application Pod on one of the Worker Nodes.
+
+ - And of course instead of randomly assigning to any Node, Scheduler has this whole intelligent on deciding on which specific Worker Node the next Node will be scheduled.
+
+ - So, first it will look at your request and see, how much resources the application you want to schedule will need, how much CPU , how much RAM, and then it's gonna go through the Worker Node and se the available resources on each one of them.
+
+ And if it sees that `one Node is least busy` and `has most resources available`, It will schedule a new pod on that Node.
+
+ >**Note**: Scheduler `just decides` on which Node a new Pod should be scheduled. The process that actually does scheduling that actually starts that Pod with a container, is the `Kubelet`. Kubelet gets the request from the Scheduler and execute the request on that Node.
+
+ - Another crutial component is the `Controller Manager`.

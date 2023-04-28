@@ -221,7 +221,8 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
     1. 'Schedule' Pod?
     2. 'Monitor' pods and when a pod dies it
     3. re-schedule/re-start a pod?
-    4. When we add a new Node (Worker Server), How does it Join the Cluster to become another node and gets pods and other components created in it?
+    4. When we add a new Node (Worker Server),
+     How does it Join the Cluster to become another node and gets pods and other components created in it?
 
 **The Answer** is: All these Managing processes are done by a `Master Nodes`.
 

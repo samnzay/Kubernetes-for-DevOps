@@ -235,9 +235,7 @@ So Master Servers (Nodes) have completely different processes running inside. An
 
 - The `1st` Service is the `API Server`. So When you as a user want to deploy a new application in the K8s Cluster, you interact with the API Server using some Client. It could be UI of K8s Dashboard, CLI tool like kubelet or a Kubernetes API.
 
->**Note**: `API Server` is like a *`Cluster Gateway`* Which gets the initial request of any update into the cluster or even the queries from the Cluster.
-
-It also act as a *`Gate Keeper`* for the Authentication,to make sure that only the authenticated and authorized requests get through the Cluster.
+>**Note**: `API Server` is like a *`Cluster Gateway`* Which gets the initial request of any update into the cluster or even the queries from the Cluster. It also act as a *`Gate Keeper`* for the Authentication,to make sure that only the authenticated and authorized requests get through the Cluster.
 
 - That Means that whenever you want to schedule new Pods, deploy new application, Create new service, you have to `talk to` the ```API Server``` on a Master Node.The API Server `validate your request` and everying is fine, then it forwards your request to other processes in order to schedule the Pod or create other component you requested.
 

@@ -206,8 +206,11 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
 
 >**Note**: Kube-Proxy `forwards` requests.
 
->**To Summarize**: 3 Node Processes must be intalled on every K8s Worker Node.
+>**To Summarize**: 3 Node Processes must be installed on every K8s Worker Node.
 
 1. Kubelet
 2. Kube Proxy
 3. Container runtime (independent)
+
+#### So, Now The Question is: 
+##### How Do you Interact with this Cluster?

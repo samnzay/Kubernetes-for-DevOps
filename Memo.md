@@ -151,7 +151,7 @@ And that component of K8s or the Blueprints is called `Deployment`.
 >**Warning**:
  `We can't replicate Database using a Deployment`! and the reason for that is that, ```Database has a State```, which is it's `data`.
 
- Meaning that, If we have replicas or clones of the database, they would all need to access shared data storage, and there ```you would need some kind of mechanism that manages``` which Pods are currently `writting to` that storage, or which Pods are `reading` to that storage, `to Avoid Data Inconsistences`.
+ Meaning that, If we have replicas or clones of the database, they would all need to access shared data storage, and there ```you would need some kind of mechanism that manages``` which Pods are currently `writting` to that storage, or which Pods are `reading` to that storage, to `Avoid Data Inconsistences`.
 
 - And that Mechanism in addition to the replicating feature, is offered by another K8s component called `StatefulSet`.
 
@@ -170,3 +170,35 @@ And a`StatefulSet` is used for ```stateFUL``` Apps or Databases.
 ---
 
 # KUBERNETES ARCHITECTURE
+
+## Master Node & Worker Node
+
+We are going to explain how kubernetes does what it does, `how` K8s Cluster is `Self-managed`, `self-healing`, and `Automated` and How you as Operator of the kubernetes cluster, should endup having much `less manual effort`.
+
+## Node processes
+
+### Worker Machine in K8s Cluster
+
+ Let's assume a basic setup of one Node with 2 applications pods running on it. One of the main components of the K8s's achitecture, are its `Worker Servers` or `Nodes`.
+
+ - And `each Node will have multiple application Pods with containers` running on that Node.
+
+ - And `the way K8s does it`, is using ```3 processes that must be installed on every Node``` that are used to schedule and manage those pods.
+
+ - So, `Nodes` are `Cluster Servers` that actually do the work. That is why some times they are called `Worker Nodes`.
+
+ - The `first process` that need to run on every node, is the `Container Runtime`. Like Docker, but it could be other container technology as well.
+
+ - So, because applications `Pods have containers running inside`, the `Container Runtime` needs to be installed on every node. 
+ 
+ But, the process that actually schedules those pods and the containers in underneath is `Kubelet`. Which is a process of Kubernetes itself unlike Container runtime that has interface with both container runtime and the machine (```The Node itself```), Because at the end of the day Kubelet is responsible for taking that configuration and actually running or starting a Pod with a container inside, and then assigning resources fromthe Node to the container like CPU RAM and storage resources.
+
+ >**Note** : Kubelet ```interacts with both``` the container and Node. 
+
+ Kubelet `starts the Pod` with a container inside.
+
+
+ - So, usually kubernetes `Cluster is made up of multiple Nodes`, which also must have container runtime and kubelet services installed. And you can have hundreds of those `Worker Nodes` which will run other Pods and containers and replicas of the existing pods like my-app and database pods in this example.
+
+ - And the way communication between them works , is usingservices
+

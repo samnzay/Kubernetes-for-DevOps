@@ -191,12 +191,22 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
 
  - So, because applications `Pods have containers running inside`, the `Container Runtime` needs to be installed on every node. 
  
- - But, the process that actually schedules those pods and the containers in underneath is `Kubelet`. Which is a process of Kubernetes itself unlike Container runtime that has interface with both container runtime and the machine (```The Node itself```), Because at the end of the day Kubelet is responsible for taking that configuration and actually running or starting a Pod with a container inside, and then assigning resources fromthe Node to the container like CPU RAM and storage resources.
+ - But, the process (```2nd process```) that actually schedules those pods and the containers in underneath is `Kubelet`. Which is a process of Kubernetes itself unlike Container runtime that has interface with both container runtime and the machine (```The Node itself```), Because at the end of the day Kubelet is responsible for taking that configuration and actually running or starting a Pod with a container inside, and then assigning resources fromthe Node to the container like CPU RAM and storage resources.
 
  >**Note** : Kubelet ```interacts with both``` the container and Node. And Kubelet `starts the Pod` with a container inside.
 
 
  - So, usually kubernetes `Cluster is made up of multiple Nodes`, which also must have container runtime and kubelet services installed. And you can have hundreds of those `Worker Nodes` which will run other Pods and containers and replicas of the existing pods like my-app and database pods in this example.
 
- - And the way communication between them works , is usingservices
+ - And the way `communication between them` works , is using `Services`, which is a sort of a load balancer that basically catches the request, direct it to the Pod of the application, like Database for example and then forwards it to the respective Pod.
 
+- And the `3rd Process` that is responsible for ```forwarding requests from Services to Pods```, is actually `Kube Proxy`. And also must be installed on every Node. Kube-Proxy has an intelligent forwarding logic inside tha makes sure that the communication also works in a performant way with low overhead.
+
+    Eg: Even application `my-app` replica is making requests to `Database`, instead of just randomly forwarding requests to any replica, `It will actually forward it to the replica that is running to the same node as the Pod that initiated the request`, thus this way avoiding the network overhead of sending the request to another machine.
+
+>**Note**: Kube-Proxy `forwards` requests.
+
+>**To Summarize**: 3 Node Processes must be intalled on every K8s Worker Node.
+    1. Kubelet
+    2. Kube Proxy
+    3. Container runtime (independent)

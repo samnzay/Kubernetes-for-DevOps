@@ -1,1 +1,1 @@
-## KUBERNETES FOR DEVOPS & DEVELOPERS (readme Coming soon)
+## KUBERNETES FOR DEVOPS & DEVELOPERS (Readme Coming soon)

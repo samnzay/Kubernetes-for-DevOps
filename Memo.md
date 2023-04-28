@@ -171,13 +171,13 @@ And a`StatefulSet` is used for ```stateFUL``` Apps or Databases.
 
 # KUBERNETES ARCHITECTURE
 
-## Master Node & Worker Node
+## Worker Node & Master Node 
 
 We are going to explain how kubernetes does what it does, `how` K8s Cluster is `Self-managed`, `self-healing`, and `Automated` and How you as Operator of the kubernetes cluster, should endup having much `less manual effort`.
 
-## Node processes
+## Worker Machine (Node) in K8s Cluster
 
-### Worker Machine in K8s Cluster
+### Node processes
 
  Let's assume a basic setup of one Node with 2 applications pods running on it. One of the main components of the K8s's achitecture, are its `Worker Servers` or `Nodes`.
 
@@ -213,4 +213,22 @@ We are going to explain how kubernetes does what it does, `how` K8s Cluster is `
 3. Container runtime (independent)
 
 #### So, Now The Question is: 
+
 ##### How Do you Interact with this Cluster?
+
+##### How to:
+
+    1. 'Schedule' Pod?
+    2. 'Monitor' pods and when a pod dies it
+    3. re-schedule/re-start a pod?
+    4. When we add a new Node (Worker Server), How does it Join the Cluster to become another node and gets pods and other components created in it?
+
+**The Answer** is: All these Managing processes are done by a `Master Nodes`.
+
+--- 
+
+## Master Node
+
+### Master Processes
+
+

@@ -274,7 +274,7 @@ So Master Servers (Nodes) have completely different processes running inside. An
 
  - And for that it makes a request to the `Scheduler` to reschedule that died Pods, and the same cycle happens here when the scheduler decides based on the resource calculation, which `Worker Node` should we start these Pods again and makes the request to the corresponding `Kubelet` on these Worker Nodes to actually restart the Pods.
 
- And Finally the last master process is `etcd`.
+ - And, finally the last master process is `etcd`.
 
  #### 4. etcd
 
@@ -290,4 +290,4 @@ So Master Servers (Nodes) have completely different processes running inside. An
 
     So, all these information is stored in etcd cluster. ```What is not stored in etcd``` key value store, `is the actual application data`. For example if you have a database application running inside of a cluster, `the data will be stored somewhere else`, not in the etcd.
 
-    etcd is just a `Cluster State Information` which is used for master processes to communicate with the Worker processes and Vice-Versa.
+    `etcd` is just a `Cluster State Information` which is used for master processes to communicate with the Worker processes and vice-versa.

@@ -442,4 +442,4 @@ Step 3: Install kubectl: ```sudo install -o root -g root -m 0755 kubectl /usr/lo
     
 - For example: To edit the Image that it uses, I will have to edit that in deployment directly and Not in the Pod.  ```kubectl edit deployment nginx-depl ```. In terminal editor change image version to nginx:1.16 and save the change.
 
-- Run ```kubectl get pods```: Youwill se that the old one will be terminating and another one with new configuration stated.
+- Run ```kubectl get pods```: You will se that the old Pod will be terminating and another one with new configuration stated. We do not work with pod directly

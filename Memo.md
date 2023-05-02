@@ -410,4 +410,36 @@ Step 3: Install kubectl: ```sudo install -o root -g root -m 0755 kubectl /usr/lo
 - ``` kubectl get pods` ``: - check pods if any. otherwise it return No resources.
 - ``` kubectl get services ```: - Check the services. Default service is `ClusterIP`.
 
+
 >**Note**: Remember! Pod is the smallest unit in K8s cluser. Usually in practice uare not working or creating Pod directly. There is an `Abstraction layer over the pod`. That is `Deployment`. This is wht what we gonna be creating and `that's gonna create the pods underneath`. Usage: ```kubectl create deployment NAME --image=image [--dry-run] [options]```.
+
+- ```kubectl create deployment nginx-depl --image=nginx```: Create NGINX Deployment. It will go ahead and download the latest image of NGINX from DockerHub.
+    
+    How It works: 
+    - When I create a deployment
+    - Deployment has all the information or the `blueprint` for creating the Pods. This is the Minimalistic configuration (Name and Image to use. That's it!)
+    - The rest is just default
+        
+
+- ``` kubectl get deployment ```: List available deployments and their status.
+- ``` kubectl get pods ```: List pods and their status like (`ContainerCreating` or `Running` ). Pods have a prefix of their deployment names plus some random hash. Eg: `nginx-depl-random_hash`.
+
+- Between deployment and a Pod there is another layer whic is automatically managed by Kubernetes Deployment, called `ReplicaSet`.
+
+- ``` kubectl get replicaset ```: Get replicaset names and State. If you Noticed, the `Pod Name` is made up of a `pefix of deployment` + `ReplicaSet's ID` + its `own ID`.
+
+- `Replicaset` is basically `managing replicas` of a Pod. 
+
+>**Warning**: You in practice `you will not` have to create, update or delete replicaset in anyway. You gonna be working with deployments directly. `Which is more convinient` because `in deployment you can configure the Pod's bluePrint completely`. You can say how many replicas of the Pod you want. And you can do the rest of the configuration there.
+
+### Layers of Abstraction
+
+```Deployment``` Manages `ReplicaSet`.
+```ReplicaSet``` manages all the replicas of that `Pod`.
+```Pod``` is an abstraction of a `Container`
+
+>**Note**: And everything `below` the deployment should be managed by the Kubernetes. You usually do not have to worry about any of it.
+    
+- For example: Image that it uses I will have to edit that in deployment directly and Not in the Pod.  ```kubectl edit deployment nginx-depl ```. In terminal editor change image version to nginx:1.16 and save the change.
+
+- Run ```kubectl get pods```: Youwill se that the old one will be terminating and another one with new configuration stated.

@@ -262,8 +262,32 @@ So Master Servers (Nodes) have completely different processes running inside. An
 
  - And if it sees that `one Node is least busy` and `has most resources available`, It will schedule a new pod on that Node.
 
- >**Note**: Scheduler `just decides` on which Node a new Pod should be scheduled. The process that actually does scheduling that actually starts that Pod with a container, is the `Kubelet`. Kubelet gets the request from the Scheduler and execute the request on that Node.
+ >**Note**: Scheduler `just decides` on which Node a new Pod should be scheduled. The process that actually does scheduling, that actually starts that Pod with a container, is the `Kubelet`. Kubelet gets the request from the Scheduler and executes the request on that Node.
 
  - Another crutial component is the `Controller Manager`.
 
  #### 3. Controller Manager
+
+ What happens when a pods die on any Node. There must be a way to detect that a Pod died and then reschedule those Pods as soon as possible.
+
+ - So, What `Controller Manager` does is to `detect Cluster state changes` like crashing of Pods for example. When the pod dies, the controller manager detects that, and try to recover the Cluster state as soon as possible.
+
+ - And for that it makes a request to the `Scheduler` to reschedule that died Pods, and the same cycle happens here when the scheduler decides based on the resource calculation, which `Worker Node` should we start these Pods again and makes the request to the corresponding `Kubelet` on these Worker Nodes to actually restart the Pods.
+
+ And Finally the last master process is `etcd`.
+
+ #### 4. etcd
+
+ `etcd` is a `key value store` of a cluster state.
+
+ >**Note**: You can think of `etcd` as the `Cluster Brain`!. Which means that every change in the cluster, for example when a new Pod is scheduled, when a pod dies, all of these changes get saved or updated into this Key-Value Store.
+
+ - And The reason why the etcd store is the cluster Brain, is because all these mechanism with Scheduler, Controller Manager, etc.. `works because of the etcd`'s `Data`.
+    
+    Eg: `How` the Scheduler knows what resources are available on each Worker Node,or `how` does controller manager knows that a cluster state changed in some way, for example pods died or that kubelet restarted new Pods up the request of the Scheduler? 
+
+    Or when you make a query request to the API Server about the cluster health,or for example your application deployment state. `where does API Server get all these state information from?`
+
+    So, all these information is stored in etcd cluster. ```What is not stored in etcd``` key value store, `is the actual application data`. For example if you have a database application running inside of a cluster, `the data will be stored somewhere else`, not in the etcd.
+
+    etcd is just a `Cluster State Information` which is used for master processes to communicate with the Worker processes and Vice-Versa.

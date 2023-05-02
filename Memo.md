@@ -108,9 +108,9 @@ Secret Is like ConfigMap, the only difference is that `it is used to store secre
 Let's say our `database` Pod our application uses, has or generates some data. `If the Database Container or the pod get restarted`, ```the Data is gone!```. That is problematic and inconvenient, obviously because you want you data or logs to be persisted reliably long term. The way you can do it in Kubernetes is using another component called `Volumes`.
 
 
-How It works, `it basically attaches a physical storage on a hard drive to your pod`.
+How it works, `it basically attaches a physical storage on a hard drive to your pod`.
 
-That Storage could be on a ```local``` machine [`On same server Node Where the Pod is running`], or could be on `remote` storage [`Outside the K8s cluster`] it means that it Could be ``Cloud Storage`` or your ``On-Premises Storage`` which is not part of the K8s Cluster. You just have an external reference on it.
+That storage could be on a ```local``` machine [`On same server Node Where the Pod is running`], or could be on `remote` storage [`Outside the K8s cluster`] it means that it Could be ``Cloud Storage`` or your ``On-Premises Storage`` which is not part of the K8s Cluster. You just have an external reference on it.
 
 - Now, when our Database container or Pod get restarted, all the Data will be there, persisted.
 
@@ -317,3 +317,46 @@ In a very small cluster we usuall have 2 Master Nodes and 3 Worker Nodes. Also t
 ---
 
 # Minikube & Kubectl
+
+## Minikube
+
+### What is Minikube?
+
+Usually in Kubernetes world, when you are setting up a `Production Cluster` it will look like something like this:
+
+    Multiple Masters Nodes at least 2.
+    Multiple Worker Nodes.
+    Master and Worker Nodes have different responsibilities.
+
+>**Note**: In real world `K8s production cluster`, Master and Worker Nodes  are Separate Virtual or Physical machines, that each represent a Node.
+
+- Now, If you want test something on your local environment, or if you want try something out very quickly for example deploying your application or new components and you want test it on your local machine, obviously setting up a cluster like this would be pretty difficult or maybe even impossible if you do not have enough resources like Memory, CPU, Storage etc.
+
+- And exactly for this use case, there is an open source tool that is called `Minikube`. So, it is basically one Node Cluster where the `Master Processes` and `Worker processeses`, ```both run on one Node```. and this Node will have a docker container
+runtime pre-installed so that you will be able to run the containers or the pods with containers on this Node.
+
+- And the way it gonna run on your laptop is trough a Virtualbox or some other hyperviser.
+- So, basically Minikube will create a virtualbox on your laptop and Nodes, and this Nodes will run inside virtualbox.
+
+>**Note**: In Minikube, is a one Node kubernetes cluster that runs in a virtual box on your laptop. which you can use for testing kubernetes on your local setup. Both master and Worker Processes `run on one Machine` (Node).
+
+- Now that you have setup a local cluster, or a Mini cluster on your laptop/PC, you need some way to interact with the Cluster. You want to create components, configure it etc. And that is where `kubectl` comes into picture.
+
+
+## Kubectl
+
+### What is kubectl?
+
+Now that you have a virtualnode on your local machine that represents `Minikube`, you need some way to interact with that cluster. you need a way to create Pods, and other kubernetes components on the Node, like [`Secret, ConfigMap, Service etc` ].
+
+- And the way to do it is using `kubectl` which is a command line tool for kubernetes cluster.
+
+- See how it actually works: Remember Minikube runs both Master and Worker processes. One of the master processes which is API Server, is actually the main entrypoint to the K8s Cluster
+
+>**Note**: API Server `enables interaction` with Cluster. if you wanna do anything in K8s, configure or create any component, you first have to talk to the API Server.
+
+- And the way to talk to the API Server is `through different clients`, you can have `UI` like in dashboard, using K8s `API`, or a `CLI` tool which is ```kubectl```.
+
+- `kubectl` is the most poweful of those 3 clients. Because with kubectl, you can do anything you want in K8s. Throughout this tutorials we will be using kubectl mostly.
+
+- So, once kubectl submits commands to the API Server, to create, configure or delete component etc.., the Worker processes on Minikube will actually make it happen. They will be actually executing the commands[`create pods, create services, destroy pods`, etc.]

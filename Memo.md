@@ -347,7 +347,7 @@ runtime pre-installed so that you will be able to run the containers or the pods
 
 ### What is kubectl?
 
-Now that you have a virtualnode on your local machine that represents `Minikube`, you need some way to interact with that cluster. you need a way to create Pods, and other kubernetes components on the Node, like [`Secret, ConfigMap, Service etc` ].
+Now that you have a virtualnode on your local machine that represents `Minikube`, you need some way to interact with that cluster. you need a way to create Pods, and other kubernetes components on the Node, like [`Secret, ConfigMap, Service, etc...` ].
 
 - And the way to do it is using `kubectl` which is a command line tool for kubernetes cluster.
 
@@ -359,4 +359,11 @@ Now that you have a virtualnode on your local machine that represents `Minikube`
 
 - `kubectl` is the most poweful of those 3 clients. Because with kubectl, you can do anything you want in K8s. Throughout this tutorials we will be using kubectl mostly.
 
-- So, once kubectl submits commands to the API Server, to create, configure or delete component etc.., the Worker processes on Minikube will actually make it happen. They will be actually executing the commands[`create pods, create services, destroy pods`, etc.]
+- So, once kubectl submits commands to the API Server, to create, configure or delete component etc.., the Worker processes on Minikube will actually make it happen. They will be actually executing the commands[`create pods, create services, destroy pods, etc...`]
+
+>**Note**: An important thing to not is that, `kubectl` is not just for minikube cluster. if you have Cloud Cluster, Hybrid Cluster or On-premises Cluster, `kubectl` is the right tool to interact with any type of K8s setup.
+
+
+#### Minikube Installation
+
+Install Minikube (Mac, Linux and Windows)[Linkhttps://minikube.sigs.k8s.io/docs/start/]

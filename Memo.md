@@ -366,4 +366,4 @@ Now that you have a virtualnode on your local machine that represents `Minikube`
 
 #### Minikube Installation
 
-[Install Minikube (Mac, Linux and Windows)](Linkhttps://minikube.sigs.k8s.io/docs/start/)
+[Install Minikube (Mac, Linux and Windows)][Linkhttps://minikube.sigs.k8s.io/docs/start/]

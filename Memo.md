@@ -254,7 +254,7 @@ So Master Servers (Nodes) have completely different processes running inside. An
 - Another Master Process is `Scheduler`.
 
 #### 2. Scheduler
- As Mentioned above, if you send an API Server a request to schedule a new Pod, `API Server after it validates your request`, `it will actually hand it over to the Scheduler` in order to start a new application Pod on one of the Worker Nodes.
+ As mentioned above, if you send an API Server a request to schedule a new Pod, `API Server after it validates your request`, `it will actually hand it over to the Scheduler` in order to start a new application Pod on one of the Worker Nodes.
 
  - And of course instead of randomly assigning to any Node, Scheduler has this whole intelligent on deciding on which specific Worker Node the next Node will be scheduled.
 
@@ -282,7 +282,7 @@ So Master Servers (Nodes) have completely different processes running inside. An
 
  >**Note**: You can think of `etcd` as the `Cluster Brain`!. Which means that every change in the cluster, for example when a new Pod is scheduled, when a pod dies, all of these changes get saved or updated into this Key-Value Store.
 
- - And The reason why the etcd store is the cluster Brain, is because all these mechanism with Scheduler, Controller Manager, etc.. `works because of the etcd`'s `Data`.
+ - And the reason why the etcd store is the cluster Brain, is because all these mechanism with Scheduler, Controller Manager, etc.. `works because of the etcd`'s `Data`.
     
     Eg: `How` the Scheduler knows what resources are available on each Worker Node,or `how` does controller manager knows that a cluster state changed in some way, for example pods died or that kubelet restarted new Pods up the request of the Scheduler? 
 
@@ -291,3 +291,28 @@ So Master Servers (Nodes) have completely different processes running inside. An
     So, all these information is stored in etcd cluster. ```What is not stored in etcd``` key value store, `is the actual application data`. For example if you have a database application running inside of a cluster, `the data will be stored somewhere else`, not in the etcd.
 
     `etcd` is just a `Cluster State Information` which is used for master processes to communicate with the Worker processes and vice-versa.
+
+>**Warning**: Application data is `not` stored in etcd!
+
+- So, now you probably already see that master processes are absolutely crutial for the cluster operation. Espectially the `etcd` store which contains some data must be reliably stored or replicated.
+
+- So in practice Kubernetes is usually made up of multiple Masters, where each master Node runs its master processes, where of course the `API Server is load balanced` and the etcd store forms a `distributed storage` across all the Master Nodes.
+
+
+#### EXAMPLE CLUSTER SET-UP
+
+In a very small cluster we usuall have 2 Master Nodes and 3 Worker Nodes. Also to note here, the hardware resources of Master and Worker Nodes actually differ.
+
+- The master processes are `more important`, but they actually have less load of work. So, they need less resources like CPU, RAM and Storage.
+
+- On the other hand, the Worker Nodes do the actual job of running those pods with containers inside. Therefore, they need more resources.
+
+- And as your application complexity and its demand of resources increases, you may actually add more master and Node servers to your cluster and thus forming a more powerful, robust cluster to meet you application resource requirements.
+
+- In an `existing` kubernetes cluster, you can actually `add new master` or `node servers` pretty `easily`.
+
+- So, `if you want to add a Master Server`, you `just get a new bare server`, you install the master processes on it, and then ```add it to the kubernetes cluster```.
+
+- The same way, `if you need two Worker Nodes`, you get pair servers, you install all the worker node processes like Container runtime, kubelet and Kube-Proxy on it and add them to the Kubernetes cluster. That's it!.
+
+- In this way, you can infinitely icrease the power and resources of your kubernetes cluster, as replication complexity and its resource demand increases. 

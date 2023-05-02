@@ -313,6 +313,10 @@ In a very small cluster we usuall have 2 Master Nodes and 3 Worker Nodes. Also t
 
 - So, `if you want to add a Master Server`, you `just get a new bare server`, you install the master processes on it, and then ```add it to the kubernetes cluster```.
 
-- The same way, `if you need two Worker Nodes`, you get pair servers, you install all the worker node processes like Container runtime, kubelet and Kube-Proxy on it and add them to the Kubernetes cluster. That's it!.
+- The same way, `if you need two Worker Nodes`, you get pair servers, you install all the worker node processes like Container runtime, Kubelet and Kube-Proxy on it and add them to the Kubernetes cluster. That's it!.
 
 - In this way, you can infinitely icrease the power and resources of your kubernetes cluster, as replication complexity and its resource demand increases. 
+
+---
+
+# Minikube & Kubectl

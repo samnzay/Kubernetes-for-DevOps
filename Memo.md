@@ -366,4 +366,50 @@ Now that you have a virtualnode on your local machine that represents `Minikube`
 
 #### Minikube Installation
 
-- [Install Minikube (Mac, Linux and Windows)](https://minikube.sigs.k8s.io/docs/start/)
+Links:
+
+- [ Install Minikube (Mac, Linux and Windows)](https://minikube.sigs.k8s.io/docs/start/)
+- [ Install Kubectl ](https://kubernetes.io/docs/tasks/tools/)
+
+
+>**Warning**: Minikube needs `Virtualization` because as we mentioned it's goona run in a virtualbox setup or some other type of hypervizer must be setup in advance. Eg: KVM, VirtualBox, etc.
+
+#### Install Minikube On Linux
+
+Step 1: Install Hypervizer. Eg: Virtualbox, Hyperkit
+
+Step 2: Run In Terminal: ```curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64```.
+
+Step 2b: Run in terminal: ```sudo install minikube-linux-amd64 /usr/local/bin/minikube```.
+
+#### Install kubectl On Linux (With CURL)
+
+Step 1: Download the latest release with the command: ```curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"```.
+
+Step 2: Validate the binary (optional): -Download the kubectl checksum file: ```curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"```.
+
+Step 2b: Validate the kubectl binary against the checksum file: ```echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check```.
+
+If valid, the output is: ```kubectl: OK```. Otherwise, "kubectl: FAILED
+sha256sum: WARNING: 1 computed checksum did NOT match".
+
+
+Step 3: Install kubectl: ```sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl```.
+
+### Minkube & Kubectl Commands
+
+- ```minikube start --vm-driver=hyperkit``` : - Create and Start the Cluster. tell Minikube which Hyperviser it will use to start a cluster. Hyperkit in this example.
+
+- ```kubectl get nodes```: - Get status on the Nodes in the Cluster.
+- ```minikube get status```: - Also Get status on the Nodes in the Cluster.
+- ```kubectl version```: - Check the Kubernetes version we have installed. It return What Client version of K8s and What the Server version of K8s.
+
+### Basic kubectl Commands
+
+- ``` kubectl get nodes ```: - get the status of th nodes.
+- ``` kubectl get pods` ``: - check pods if any. otherwise it return No resources.
+- ``` kubectl get services ```: - Check the services. Default service is `ClusterIP`.
+
+>**Note**: Remember! Pod is the smallest unit in K8s cluser. Usually in practice uare not working or creating Pod directly. There is an `Abstraction layer over the pod`. That is `Deployment`. This is wht what we gonna be creating and `that's gonna create the pods underneath`.
+
+Usage: ```kubectl create deployment NAME --image=image [--dry-run] [options]```.

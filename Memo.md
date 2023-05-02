@@ -19,7 +19,7 @@ You only interact with the kubernetes Layer.
 
 This is where anonther component comes into rescue! that component is `Service`.
 
----
+
 
 ## Service and Ingress
 
@@ -62,7 +62,6 @@ Eg: ```http://myapp-service-ip:port```.
 - This is where onother service called `Ingress` comes into rescue!
 - The ```Request goes first to Ingress``` and ```ingress does the forwarding```, then to the Service.
 
----
 
 ## ConfigMap and Secret
 
@@ -102,8 +101,6 @@ Secret Is like ConfigMap, the only difference is that `it is used to store secre
 
 >**Note** : You can use the Secret component as environmrnt variable or as a Properties file.
 
----
-
 ## Volumes
 
 ### Data Storage
@@ -122,7 +119,7 @@ That Storage could be on a ```local``` machine [`On same server Node Where the P
 
 - It means that, you as a user or administarator ```you are responsible``` for `backing up the data`, `replicating` and managing it and making sure it is kept on proper hardware etc.
 
----
+
 ## Deployment and Stateful Set
 
 Let's say our application pod dies, crashes and the user is no longer accessing our app through browser. Here is a downtime.

@@ -410,6 +410,4 @@ Step 3: Install kubectl: ```sudo install -o root -g root -m 0755 kubectl /usr/lo
 - ``` kubectl get pods` ``: - check pods if any. otherwise it return No resources.
 - ``` kubectl get services ```: - Check the services. Default service is `ClusterIP`.
 
->**Note**: Remember! Pod is the smallest unit in K8s cluser. Usually in practice uare not working or creating Pod directly. There is an `Abstraction layer over the pod`. That is `Deployment`. This is wht what we gonna be creating and `that's gonna create the pods underneath`.
-
-Usage: ```kubectl create deployment NAME --image=image [--dry-run] [options]```.
+>**Note**: Remember! Pod is the smallest unit in K8s cluser. Usually in practice uare not working or creating Pod directly. There is an `Abstraction layer over the pod`. That is `Deployment`. This is wht what we gonna be creating and `that's gonna create the pods underneath`. Usage: ```kubectl create deployment NAME --image=image [--dry-run] [options]```.

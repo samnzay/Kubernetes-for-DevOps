@@ -469,13 +469,13 @@ Another very practical command is `kubectl logs`. Which actually shows what appl
 
 - ```kubectl delete deployment [deployment name]```: To get rid all the Pods, replicaset underneath this deployment. I will have to delete the Deployment. So all the CRUD operations (Create, Read, Update and Delete) happens on the `Deployment level`. Everything underneath just follows automatically.
 
-- In the similar way, we can create other Kubernetes resources like Services etc. However as you noticed as we  were creating K8s components like `deployment`, using `kubectl create deployment`, you have to provide allthe options in the CLI, you have to say the `name`, `image`, `option1`, `option2` etc.
+- In the similar way, we can create other Kubernetes resources like Services etc. However as you noticed as we  were creating K8s components like `deployment`, using `kubectl create deployment`, you have to provide all the options in the CLI, you have to say the `name`, `image`, `option1`, `option2` etc.
 
-- There could be a lot of things you wanna configure in your deployment or in the pod. And obviously it will be impractical to write all out on the Command Line. Because of this, in practice you will usually work with `Kubernetes Configuration files`. Meaning `What component` you are creating is, `what image` it is based off and any other option, they are all gathered in a configuration file, and you just tell kubectl to execute that configutaion file, And the way you do it is using `kubectl apply -f [file name]` command. 
+- There could be a lot of things you wanna configure in your deployment or in the pod. And obviously it will be impractical to write all out on the Command Line. Because of this, in practice you will usually work with `Kubernetes Configuration files`. Meaning `What component` you are creating is, `what image` it is based off, and any other option, they are all gathered in a configuration file, and you just tell kubectl to execute that configutaion file, And the way you do it, is using `kubectl apply -f [file name]` command. 
 
  #### Apply Configuration file
 
- Apply basicalyy takes the configuration file as a parameter and does whatever you have writted in that file.
+ Apply basically takes the configuration file as a parameter and does whatever you have writted in that file.
 
  - And Apply basically takes an option called `-f` that stands for `File` and here you would say the name of the file.
 
@@ -531,6 +531,9 @@ For the `apiVersion`, you have to look up for each component there is a differen
 
 - Another interesting question is : **Where does Kubernetes actually gets that data to automatically adhere or update continuously?**
 
-- That information comes from the `etcd`. Remember the **Cluster brain**, one of the master processes that actually stores the cluster data. So `etcd` holds at anytime the current ststus of any Kubernetes component and `that is where the status information comes from`.
+- That information comes from the `etcd`. Remember the **Cluster brain**, one of the master processes that actually stores the cluster data. So, `etcd` holds at anytime the current status of any Kubernetes component and `that is where the status information comes from`.
 
 >**Note**: `etcd` holds the current status of any K8s component!
+
+
+### Format of Configuration file

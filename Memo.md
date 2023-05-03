@@ -406,12 +406,22 @@ Step 3: Install kubectl: ```sudo install -o root -g root -m 0755 kubectl /usr/lo
 
 ### Basic kubectl Commands
 
+#### Status of Different K8s Components
+
+- `kubectl get nodes | pod | services | replicaset | deployment`.
+
 - ``` kubectl get nodes ```: - get the status of th nodes.
 - ``` kubectl get pods` ``: - check pods if any. otherwise it return No resources.
 - ``` kubectl get services ```: - Check the services. Default service is `ClusterIP`.
 
 
 >**Note**: Remember! Pod is the smallest unit in K8s cluser. Usually in practice uare not working or creating Pod directly. There is an `Abstraction layer over the pod`. That is `Deployment`. This is wht what we gonna be creating and `that's gonna create the pods underneath`. Usage: ```kubectl create deployment NAME --image=image [--dry-run] [options]```.
+
+#### CRUD Commands
+
+- `kubectl create deployment [deployment name]` : *`Create`* deployment.
+- `kubectl edit deployment [deployment name]` : *`Edit`* Deployment.
+- `kubectl delete deployment [deployment name]`: *`Detele`* Deployment
 
 - ```kubectl create deployment nginx-depl --image=nginx```: Create NGINX Deployment. It will go ahead and download the latest image of NGINX from DockerHub.
     
@@ -471,8 +481,10 @@ Another very practical command is `kubectl logs`. Which actually shows what appl
 
  - ```kubectl apply -f config-file.yaml```: This is the format you're usually gonna use for the configurations files, and this is the command that executes whatever in the configuration file.
 
- - Lets say our configuiration file is [`nginx-depl.yaml`](deployment/nginx-depl.yaml). And then deploy it.
- - ```kubectl apply -f nginx-depl.yaml```.
+ - Let's say our configuiration file is [`nginx-depl.yaml`](deployment/nginx-depl.yaml). And then deploy it.
+ - Run ```kubectl apply -f nginx-depl.yaml```. and check Pod by ```kubectl get pod```, check Deployment by ```kubectl get deployment```. the message will be `deployment created`.
 
+ - If you want to change something in that deployment, you can actually change your local configuration file and apply it again. Eg change number of replicas. then the message will me the `deployment Configured`. *Because `K8s knows when` to Create or Update the deployment*.
 
+>**Note**: You can do ```kubectl apply``` `with any K8s component`. You can use it to create Services, Volumes and any other K8s components. just like we did with deployment.
 

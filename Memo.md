@@ -424,22 +424,54 @@ Step 3: Install kubectl: ```sudo install -o root -g root -m 0755 kubectl /usr/lo
 - ``` kubectl get deployment ```: List available deployments and their status.
 - ``` kubectl get pods ```: List pods and their status like (`ContainerCreating` or `Running` ). Pods have a prefix of their deployment names plus some random hash. Eg: `nginx-depl-random_hash`.
 
-- Between deployment and a Pod there is another layer whic is automatically managed by Kubernetes Deployment, called `ReplicaSet`.
+- Between deployment and a Pod there is another layer which is automatically managed by Kubernetes Deployment, called `ReplicaSet`.
 
 - ``` kubectl get replicaset ```: Get replicaset names and State. If you Noticed, the `Pod Name` is made up of a `pefix of deployment` + `ReplicaSet's ID` + its `own ID`.
 
 - `Replicaset` is basically `managing replicas` of a Pod. 
 
->**Warning**: You in practice `you will not` have to create, update or delete replicaset in anyway. You gonna be working with deployments directly. `Which is more convinient` because `in deployment you can configure the Pod's bluePrint completely`. You can say how many replicas of the Pod you want. And you can do the rest of the configuration there.
+>**Warning**: You in practice `you will not` have to create, update or delete replicaset in anyway. You gonna be working with deployments directly. `Which is more convinient` because `in deployment you can configure the Pod's Blueprint completely`. You can say how many replicas of the Pod you want. And you can do the rest of the configuration there.
 
 ### Layers of Abstraction
 
-```Deployment``` Manages `ReplicaSet`.
-```ReplicaSet``` manages all the replicas of that `Pod`.
-```Pod``` is an abstraction of a `Container`
+- A ```Deployment``` Manages `ReplicaSet`.
+- A ```ReplicaSet``` manages all the replicas of that `Pod`.
+- A ```Pod``` is an abstraction of a `Container`
 
 >**Note**: And everything `below` the deployment should be managed by the Kubernetes. You usually do not have to worry about any of it.
     
 - For example: To edit the Image that it uses, I will have to edit that in deployment directly and Not in the Pod.  ```kubectl edit deployment nginx-depl ```. In terminal editor change image version to nginx:1.16 and save the change.
 
-- Run ```kubectl get pods```: You will se that the old Pod will be terminating and another one with new configuration stated. We do not work with pod directly
+- Run ```kubectl get pod```: You will se that the old Pod will be terminating and another one with new configuration stated. We do not work with pod directly.
+
+- And if you run ```kubectl get replicaset```: You will see that the old one has no pod in it, and a new one has been created as well. We just edited the `Deployment`, and everything below that, got automatically updated.
+
+#### Debugging Pods
+
+Another very practical command is `Kubectl logs`. Which actually shows what application running inside the pod actually logged.
+
+- ```kubectl logs [pod name]```: show logs inside this container.
+- ```kubectl describe [pod name]```: Show additional information, for example when Pod is created but container is not starting. you want to see more details, what is happening inside the pod.
+
+- ```kubectl exec -it [pod name] --bin/bash```: Get the terminal of the application container. It is used most of the time for debugging purpose. You can enter into the container and execute some commands inside there. `-it` option stands for Interactive Terminal.
+
+#### Delete Deployment
+
+- ```kubectl delete deployment [deployment name]```: To get rid all the Pods, replicaset underneath this deployment. I will have to delete the Deployment. So all the CRUD Operations (Create, Read, Update and Delete) happens on the `Deployment level`. Everything underneath just follows automatically.
+
+- In the Similar way we can create other Kubernetes resources like Services etc. However as you noticed as we  were creating K8s components like `deployment`, using `kubectl create deployment`, you have to provide allthe options in the CLI, you have to say the `name`, `image`, `option1`, `option2` etc.
+
+- there could be a lot of things you wanna configure in your deployment or in the pod. And obviously it will be impractical to write all out on the Command Line. Because of this, in practice you will usually work with `Kubernetes Configuration files`.
+
+ Meaning `What component` you are creating is, `what image` it is based off and any other option, they are all gathered in a configuration file, and you just tell kubectl to execute that configutaion file, And the way you do it is using `kubectl apply -f [file name]` command. 
+
+ #### Apply Configuration file
+
+ Apply basicalyy takes the configuration file as a parameter and does whatever you have writted in that file.
+
+ - And Apply basically takes an option called `-f` that stands for `File` and here you would say the name of the file.
+
+ - ```kubectl apply -f config-file.yaml```: This is the format you're usually gonna use for the configurations files, and this is the command that executes whatever in the configuration file.
+
+
+

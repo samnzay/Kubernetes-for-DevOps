@@ -1,0 +1,28 @@
+appVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+
+# Specification for "Deployment".
+spec:
+  replicas: 1
+  selector: 
+    matchlabels:
+    app: nginx
+
+ 
+  template:
+    metadata:
+      labels:
+        app: nginx
+
+    #The spec below is the BluePrint for "Pods".
+    spec: 
+      containers:
+      - name: nginx #One container inside of the pod
+        image: inginx:1.16 # With NGINX image
+        ports:
+        - containerPort: 80 # Bind that Container on Port 80.
+

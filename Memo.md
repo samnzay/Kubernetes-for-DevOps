@@ -471,5 +471,8 @@ Another very practical command is `kubectl logs`. Which actually shows what appl
 
  - ```kubectl apply -f config-file.yaml```: This is the format you're usually gonna use for the configurations files, and this is the command that executes whatever in the configuration file.
 
+ - Lets say our configuiration file is [`nginx-depl.yaml`](deployment/nginx-depl.yaml). And then deploy it.
+ - ```kubectl apply -f nginx-depl.yaml```.
+
 
 

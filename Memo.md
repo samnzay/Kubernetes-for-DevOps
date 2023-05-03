@@ -491,3 +491,46 @@ Another very practical command is `kubectl logs`. Which actually shows what appl
 ---
 
 # K8s YAML CONFIGURATION FILE
+
+## OVERVIEW
+
+We are going to learn the syntax and the content of the `Kubernetes  configuration file`. Which is the main the for creating and configuring a component in a Kubernetes Cluster. We will be looking into:
+
+- The `3 parts` of the configuration file.
+- `Connecting` Deployments to Service to Pods.
+- `Demo`.
+
+### 3 Parts Of K8s Configuration File.
+
+Every configuration file in K8s has 3 Parts either Deployment or Service file. 
+
+#### 1. Metadata
+
+The first part is where the metadata of that component you are creating resides.
+One of the metadata is obviously `name` *`of the component itself`*.
+
+#### 2. Specification
+
+Each component's configuration file, will have a `specification` where you basically put every kind of configuration you want to apply for that component. The first 2 lines of the file (`apiVersion` and `kind`) is just declaring what you want to create. Either you want to create Deployment (`apiVersion: apps/v1`, `kind: Deployment`) or you want to create a Service (`apiVersion: v1`, `kind: Service`) etc. 
+
+For the `apiVersion`, you have to look up for each component there is a different API version.
+
+>**Note**: The attributes of `spec` are *`specific`* to the *`kind`*!
+
+- Now, Inside the specification part, obviously *`the attributes will be specific to the kind of the component that you are creating`*. The Deployment will have its own attributes that only apply for deployment and Service will have its own stuff. But remember there are 3 parts of the configuration file.  And We have just seen (1) Metadata and (2) Specification and what is the third part?. 
+
+#### 3. Status
+
+- The 3rd part is the `Status`. But, it's gonna be automatically generated and added by Kubernetes. So the way it works is that, `Kubernetes will always compare` what is the *`desired state`* and what is the *`actual state`* or the status of the component.
+
+- If the status of the desired state and the actual state does not match, then `K8s know s there is something to be fixed there, so it's gonna try to fix it`. And this is the basis of the *`self-healing`* feature that Kubernetes provides.
+
+    Eg: here you specify you want 2 replicas of NGINX deployment, so when you apply this when you actually create the deployment using the Deployment configuration file (`That is what apply means`), K8s will adhere the status of your deployment. And will update that state continuously.
+
+    So for example if a status at some point will say just one replica is running, the K8s will compare that status with the specification and will know there is a problem there and another replica needs to be created ASAP!
+
+- Another interesting question is : **Where does Kubernetes actually gets that data to automatically adhere or update continuously?**
+
+- That information comes from the `etcd`. Remember the **Cluster brain**, one of the master processes that actually stores the cluster data. So `etcd` holds at anytime the current ststus of any Kubernetes component and `that is where the status information comes from`.
+
+>**Note**: `etcd` holds the current status of any K8s component!

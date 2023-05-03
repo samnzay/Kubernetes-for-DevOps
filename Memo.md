@@ -461,9 +461,7 @@ Another very practical command is `Kubectl logs`. Which actually shows what appl
 
 - In the Similar way we can create other Kubernetes resources like Services etc. However as you noticed as we  were creating K8s components like `deployment`, using `kubectl create deployment`, you have to provide allthe options in the CLI, you have to say the `name`, `image`, `option1`, `option2` etc.
 
-- there could be a lot of things you wanna configure in your deployment or in the pod. And obviously it will be impractical to write all out on the Command Line. Because of this, in practice you will usually work with `Kubernetes Configuration files`.
-
-Meaning `What component` you are creating is, `what image` it is based off and any other option, they are all gathered in a configuration file, and you just tell kubectl to execute that configutaion file, And the way you do it is using `kubectl apply -f [file name]` command. 
+- there could be a lot of things you wanna configure in your deployment or in the pod. And obviously it will be impractical to write all out on the Command Line. Because of this, in practice you will usually work with `Kubernetes Configuration files`. Meaning `What component` you are creating is, `what image` it is based off and any other option, they are all gathered in a configuration file, and you just tell kubectl to execute that configutaion file, And the way you do it is using `kubectl apply -f [file name]` command. 
 
  #### Apply Configuration file
 

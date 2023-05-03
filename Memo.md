@@ -488,3 +488,6 @@ Another very practical command is `kubectl logs`. Which actually shows what appl
 
 >**Note**: You can do ```kubectl apply``` `with any K8s component`. You can use it to create Services, Volumes and any other K8s components. just like we did with deployment.
 
+---
+
+# K8s YAML CONFIGURATION FILE

@@ -1,0 +1,1 @@
+{"dependencies":[["vagrant-hosts",["= 2.9.0"]]],"checksum":"055584bfd0fdeffc3f81429ef50df40e74e55929cd7fddd8ead2efe6ae2b7453","vagrant_version":"2.3.6"}

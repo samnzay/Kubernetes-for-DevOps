@@ -1,0 +1,1 @@
+kubectl logs -f user-service-c5d4d6569-vkhdw -n dev

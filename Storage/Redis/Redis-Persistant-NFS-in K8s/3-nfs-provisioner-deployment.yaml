@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-nfs-client-provisioner
+  labels:
+    app: dev-nfs-client-provisioner
+  namespace: dev
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: dev-nfs-client-provisioner
+  template:
+    metadata:
+      labels:
+        app: dev-nfs-client-provisioner
+    spec:
+      serviceAccountName: dev-nfs-client-provisioner
+      containers:
+        - name: dev-nfs-client-provisioner
+          image: gcr.io/k8s-staging-sig-storage/nfs-subdir-external-provisioner:v4.0.1
+          volumeMounts:
+            - name: dev-nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: dev.io/dev-external-provisioner
+            - name: NFS_SERVER
+              value: 192.168.8.102
+            - name: NFS_PATH
+              value: /home/ajanthan/nfs-share/dev-redis-data
+      volumes:
+        - name: dev-nfs-client-root
+          nfs:
+            server: 192.168.8.102
+            path: /home/ajanthan/nfs-share/dev-redis-data

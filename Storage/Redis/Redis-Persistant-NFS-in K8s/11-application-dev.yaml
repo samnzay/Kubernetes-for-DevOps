@@ -1,0 +1,22 @@
+server:
+  port: 8098
+spring:
+  datasource:
+    jdbc-url: jdbc:mysql://192.168.8.102:3306/user_db
+    password: XXXXXXXXX
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: springboot
+  jpa:
+    hibernate:
+      ddl-auto: auto
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  flyway:
+    enabled: true
+    url: jdbc:mysql://192.168.8.102:3306/user_db
+    user: springboot
+    password: XXXXXXX
+  cache:
+    type: redis
+  redis:
+    host: redis
+    port: 6379

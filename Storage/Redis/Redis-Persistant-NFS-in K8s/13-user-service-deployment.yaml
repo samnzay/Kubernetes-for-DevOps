@@ -1,0 +1,35 @@
+piVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  labels:
+    app: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: ajanthaneng/apps-redis:1.0.0
+        ports:
+        - containerPort: 8098
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80 #the port in which the service should route
+    targetPort: 8098 #actual port where end container is running
+  type: ClusterIP

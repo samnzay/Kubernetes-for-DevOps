@@ -349,7 +349,7 @@ sudo kubeadm join 172.16.16.100:6443 --token 1d7jjq.4fwycym7c9d8xl8f \
 
 >**Warning**: Don't forget the --apiserver-advertise-address option to the join command when you join the other master nodes.
 
->**Note**: Note that the `172.16.16.100:6443` is the Loadbalancer VirtualIP with port 6443 open, and the `--apiserver-advertise-address=172.16.16.102` is the kmaster2 IP address. This can be any IP of the master node being joined to the cluster. repeat the same process to add more Master nodes.
+>**Note**: Note that the `172.16.16.100:6443` is the Loadbalancer Virtual_IP with port 6443 open, and the `--apiserver-advertise-address=172.16.16.102` is the kmaster2 IP address. This can be any IP of the master node being joined to the cluster. repeat the same process to add more Master nodes.
 
 
 Eg: Join `Kmaster3`. Run this command on Kmaster3 terminal
@@ -363,11 +363,28 @@ sudo kubeadm join 172.16.16.100:6443 --token 1d7jjq.4fwycym7c9d8xl8f \
 ```
 - With kmaster3 IP = 172.16.16.103
 
+Again, Do the below command on each `successfully joined Master Node`, if you want to administer the cluster from that master node.
+```
+{
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+}
+```
 
 ## Join worker nodes to the cluster
-#Eg: Join Kmaster3. Run this command on Kmaster3 terminal
+#Eg: Join kworker1. Run this command on kworker1 terminal
+```
 sudo kubeadm config images pull
+```
 > Use the kubeadm join command you copied from the output of kubeadm init command on the first master
+
+Then you can `join any number of worker nodes` by running the following on each node as root:
+On the respective Worker node terminal
+```
+sudo kubeadm join 172.16.16.100:6443 --token 1d7jjq.4fwycym7c9d8xl8f \
+        --discovery-token-ca-cert-hash sha256:ab8326exxxxxxxxxxxxxxxx8ba733d5ea7678b1ec5faeb96xxxxxd932a8f2fd2
+```
 
 
 ## Downloading kube config to your local machine

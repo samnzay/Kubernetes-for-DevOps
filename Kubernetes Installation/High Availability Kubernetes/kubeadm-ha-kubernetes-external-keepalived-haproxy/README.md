@@ -446,13 +446,13 @@ sudo apt install -y kubectl=1.22.0-00
 }
 ```
 
-##### Downloading kube config to your local machine
+##### Downloading kube config to your `Cluster Admin Host` machine
 On your Cluster Admin host machine
 ```
 mkdir ~/.kube
 scp root@172.16.16.101:/etc/kubernetes/admin.conf ~/.kube/config
 ```
->**Note**: Note that `172.16.16.101` is the IP of the `kmaster1` Node.
+>**Note**: Note that `172.16.16.101` is the IP of the `kmaster1` Node. We are copying config files from there, via SSH.
 
 Password for root account is `kubeadmin` (if you used my Vagrant setup).
 

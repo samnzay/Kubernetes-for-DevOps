@@ -319,7 +319,7 @@ wget https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/cu
 ```
 
 * The network section will now look like;
-    * - blockSize: 26
+    * -blockSize: 26
     *  cidr: 192.168.0.0/16
 
 ##### Update the network subnet to match your subnet.
@@ -338,8 +338,18 @@ kubectl create -f custom-resources.yaml
 
 ## Join other master nodes to the cluster
 > Use the respective kubeadm join commands you copied from the output of kubeadm init command on the first master.
+You can now join any number of the control-plane node running the following command on each as root:
+Eg: Join Kmaster2. Run this command on Kmaster2 terminal
+```
+sudo kubeadm config images pull
+```
+sudo kubeadm join 172.16.16.100:6443 --token 1d7jjq.4fwycym7c9d8xl8f \
+        --discovery-token-ca-cert-hash sha256:ab8326e3axxxxxxxxxxxxxxxxxxxx1ec5faeb96062cbd932a8f2fd2 \
+        --control-plane --certificate-key 9be525b85dbb34551bxxxxxxxxxxxxxxd6b230c4fbe --apiserver-advertise-address=172.16.16.102
 
-> IMPORTANT: Don't forget the --apiserver-advertise-address option to the join command when you join the other master nodes.
+>**Warning**: Don't forget the --apiserver-advertise-address option to the join command when you join the other master nodes.
+
+>**Note**: Note that the `172.16.16.100:6443` is the Loadbalancer VirtualIP with port 6443 open, and the `--apiserver-advertise-address=172.16.16.102` is the kmaster2 IP address. This can be any IP of the master node being joined to the cluster. repeat the same process to add more Master nodes.
 
 ## Join worker nodes to the cluster
 > Use the kubeadm join command you copied from the output of kubeadm init command on the first master

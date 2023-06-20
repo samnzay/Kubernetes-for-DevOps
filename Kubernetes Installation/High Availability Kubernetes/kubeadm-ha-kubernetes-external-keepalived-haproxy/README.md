@@ -270,7 +270,7 @@ sudo echo deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://apt.kuber
 }
 ```
 
-##### Due to a Known Issue When "kubeadmin init" or "kubeadmin join" commands are run, Ensure to run the below commands:
+##### Due to a Known Issue When the "kubeadmin init" or "kubeadmin join" commands are run, Ensure to run the below commands:
 ```
 {
 echo "net.bridge.bridge-nf-call-iptables = 1" | sudo tee --append /etc/sysctl.conf

@@ -375,7 +375,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 ## Join worker nodes to the cluster
-#Eg: Join kworker1. Run this command on kworker1 terminal
+Eg: Join kworker1. Run this command on kworker1 terminal
 ```
 sudo kubeadm config images pull
 ```
@@ -388,14 +388,6 @@ sudo kubeadm join 172.16.16.100:6443 --token 1d7jjq.4fwycym7c9d8xl8f \
         --discovery-token-ca-cert-hash sha256:ab8326exxxxxxxxxxxxxxxx8ba733d5ea7678b1ec5faeb96xxxxxd932a8f2fd2
 ```
 
-
-## Downloading kube config to your local machine
-On your host machine
-```
-mkdir ~/.kube
-scp root@172.16.16.101:/etc/kubernetes/admin.conf ~/.kube/config
-```
-Password for root account is kubeadmin (if you used my Vagrant setup)
 
 ## Verifying the cluster
 ### On any of the master Nodes terminal
@@ -435,4 +427,40 @@ kubectl cluster-info dump
 sudo kubeadm token create --print-join-command
 ```
 
-Have Fun!!
+## Configure Cluster Admin Host Machine (Optional)
+Configure your admin host for `Cluster remote Access`.
+
+On your Cluster-Admin machine
+##### Install kubectl
+```
+{
+sudo apt update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+curl -L https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add
+sudo touch /etc/apt/sources.list.d/kubernetes.list
+sudo chmod 666 /etc/apt/sources.list.d/kubernetes.list
+sudo echo deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://apt.kubernetes.io/ kubernetes-xenial main | tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+sudo apt install -y kubectl=1.22.0-00
+}
+```
+
+##### Downloading kube config to your local machine
+On your Cluster Admin host machine
+```
+mkdir ~/.kube
+scp root@172.16.16.101:/etc/kubernetes/admin.conf ~/.kube/config
+```
+>**Note**: Note that `172.16.16.101` is the IP of the `kmaster1` Node.
+
+Password for root account is `kubeadmin` (if you used my Vagrant setup).
+
+##### Verifying the cluster from your  `Cluster Admin Host`.
+```
+kubectl cluster-info
+kubectl get nodes
+kubectl get pods --all-namespaces
+```
+
+Have Fun with K8s!!

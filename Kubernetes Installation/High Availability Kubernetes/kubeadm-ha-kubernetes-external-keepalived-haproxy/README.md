@@ -339,7 +339,7 @@ kubectl create -f custom-resources.yaml
 ## Join other master nodes to the cluster
 > Use the respective kubeadm join commands you copied from the output of kubeadm init command on the first master.
 You can now join any number of the control-plane node running the following command on each as root:
-Eg: Join Kmaster2. Run this command on Kmaster2 terminal
+Eg: Join `Kmaster2`. Run this command on Kmaster2 terminal
 ```
 sudo kubeadm config images pull
 ```
@@ -351,7 +351,22 @@ sudo kubeadm join 172.16.16.100:6443 --token 1d7jjq.4fwycym7c9d8xl8f \
 
 >**Note**: Note that the `172.16.16.100:6443` is the Loadbalancer VirtualIP with port 6443 open, and the `--apiserver-advertise-address=172.16.16.102` is the kmaster2 IP address. This can be any IP of the master node being joined to the cluster. repeat the same process to add more Master nodes.
 
+
+Eg: Join `Kmaster3`. Run this command on Kmaster3 terminal
+```
+sudo kubeadm config images pull
+```
+```
+sudo kubeadm join 172.16.16.100:6443 --token 1d7jjq.4fwycym7c9d8xl8f \
+        --discovery-token-ca-cert-hash sha256:abxxxxxxx1869b69b1xxxxxxxxxxxxx8b1ec5faeb96062cbd932a8f2fd2 \
+        --control-plane --certificate-key 9be525b85dbbxxxxxxxxxxxxxxxxxxxxxxxx9b62eef08db87a6f9d6b230c4fbe --apiserver-advertise-address=172.16.16.103
+```
+- With kmaster3 IP = 172.16.16.103
+
+
 ## Join worker nodes to the cluster
+#Eg: Join Kmaster3. Run this command on Kmaster3 terminal
+sudo kubeadm config images pull
 > Use the kubeadm join command you copied from the output of kubeadm init command on the first master
 
 

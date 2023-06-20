@@ -8,7 +8,7 @@ This repository contains topics related to Kubernetes a Cloud Native platform. T
 * [Kubernetes Basics and Architecture](/Memo.md)
 
 #### Setup Kubernetes Cluster
-* [High Availability Cluster Setup](/Kubernetes%20Installation/High%20Availability%20Kubernetes/kubeadm-ha-kubernetes-external-keepalived-haproxy/)
+* [High Availability Kubernetes Cluster Setup](/Kubernetes%20Installation/High%20Availability%20Kubernetes/kubeadm-ha-kubernetes-external-keepalived-haproxy/)
 
 #### Setup Redis Cluster In Kubernetes
 * [Setup Redis Cluster with Redis Sentinel](/Storage/Redis/Kubernetes/)

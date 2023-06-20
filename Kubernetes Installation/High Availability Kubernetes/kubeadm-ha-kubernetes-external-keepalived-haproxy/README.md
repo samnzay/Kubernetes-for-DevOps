@@ -10,7 +10,7 @@ This documentation guides you in setting up a cluster with three master nodes, o
 ## Vagrant Environment
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
-|Cluster Admin|cluster-admin1.example.com|172.16.16.31|Ubuntu 20.04|1G|1|
+|Cluster Admin (Optional)|cluster-admin1.example.com|172.16.16.31|Ubuntu 20.04|1G|1|
 |Load Balancer|loadbalancer1.example.com|172.16.16.51|Ubuntu 20.04|1G|1|
 |Load Balancer|loadbalancer2.example.com|172.16.16.52|Ubuntu 20.04|1G|1|
 |Master|kmaster1.example.com|172.16.16.101|Ubuntu 20.04|2G|2|
@@ -136,7 +136,7 @@ EOF
 ```
 ##### Enable & restart haproxy service
 ```
-sudo systemctl enable haproxy && systemctl restart haproxy
+sudo systemctl enable haproxy && sudo systemctl restart haproxy
 ```
 ## Pre-requisites on all kubernetes nodes (masters & workers)
 ##### Disable swap

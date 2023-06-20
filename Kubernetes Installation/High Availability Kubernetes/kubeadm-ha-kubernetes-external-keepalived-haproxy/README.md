@@ -232,7 +232,6 @@ sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.1.1.tgz
 * Convert containerd into service
 ```
 {
-  
 sudo mkdir /etc/containerd
 containerd config default | sudo tee /etc/containerd/config.toml
 sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
@@ -296,8 +295,7 @@ sudo kubeadm init --control-plane-endpoint="172.16.16.100:6443" --upload-certs -
 
 >**Note**: Copy the respective commands to join other `master nodes` and `worker nodes`, as a result of the previous command.
 
-###### Follow instructions shown as result of the pevious "Kubeadmin init" command
-##### Do this if you want to administer the cluster from this master node.
+###### Follow instructions shown as result of the pevious "Kubeadmin init" command. Again, Do the below command, if you want to administer the cluster from this master node.
 ```
 {
 mkdir -p $HOME/.kube

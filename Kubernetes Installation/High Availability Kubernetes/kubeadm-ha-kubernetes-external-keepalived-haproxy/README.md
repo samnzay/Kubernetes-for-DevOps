@@ -343,11 +343,13 @@ Eg: Join `Kmaster2`. Run this command on Kmaster2 terminal
 ```
 sudo kubeadm config images pull
 ```
+```
 sudo kubeadm join 172.16.16.100:6443 --token 1d7jjq.4fwycym7c9d8xl8f \
         --discovery-token-ca-cert-hash sha256:ab8326e3axxxxxxxxxxxxxxxxxxxx1ec5faeb96062cbd932a8f2fd2 \
         --control-plane --certificate-key 9be525b85dbb34551bxxxxxxxxxxxxxxd6b230c4fbe --apiserver-advertise-address=172.16.16.102
+```
 
->**Warning**: Don't forget the --apiserver-advertise-address option to the join command when you join the other master nodes.
+>**Warning**: Don't forget the --apiserver-advertise-address option to the join command when you join the other master nodes. And `remember to replace these join commands your respectively generated commands`.
 
 >**Note**: Note that the `172.16.16.100:6443` is the Loadbalancer Virtual_IP with port 6443 open, and the `--apiserver-advertise-address=172.16.16.102` is the kmaster2 IP address. This can be any IP of the master node being joined to the cluster. repeat the same process to add more Master nodes.
 

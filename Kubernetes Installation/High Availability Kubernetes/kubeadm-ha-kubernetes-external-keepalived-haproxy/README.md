@@ -10,12 +10,13 @@ This documentation guides you in setting up a cluster with three master nodes, o
 ## Vagrant Environment
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
-|Load Balancer|loadbalancer1.example.com|172.16.16.51|Ubuntu 20.04|512M|1|
-|Load Balancer|loadbalancer2.example.com|172.16.16.52|Ubuntu 20.04|512M|1|
+|Cluster Admin|cluster-admin1.example.com|172.16.16.31|Ubuntu 20.04|1G|1|
+|Load Balancer|loadbalancer1.example.com|172.16.16.51|Ubuntu 20.04|1G|1|
+|Load Balancer|loadbalancer2.example.com|172.16.16.52|Ubuntu 20.04|1G|1|
 |Master|kmaster1.example.com|172.16.16.101|Ubuntu 20.04|2G|2|
 |Master|kmaster2.example.com|172.16.16.102|Ubuntu 20.04|2G|2|
 |Master|kmaster3.example.com|172.16.16.103|Ubuntu 20.04|2G|2|
-|Worker|kworker1.example.com|172.16.16.201|Ubuntu 20.04|2G|2|
+|Worker|kworker1.example.com|172.16.16.201|Ubuntu 20.04|2G/3G+|2|
 
 > * Password for the **root** account on all these virtual machines is **kubeadmin**
 > * Perform all the commands as root user unless otherwise specified
@@ -44,12 +45,12 @@ vagrant up --provider libvirt
 ## Set up load balancer nodes (loadbalancer1 & loadbalancer2)
 ##### Install Keepalived & Haproxy
 ```
-apt update && apt install -y keepalived haproxy
+sudo apt update && sudo apt install -y keepalived haproxy
 ```
 ##### configure keepalived
 On both nodes create the health check script /etc/keepalived/check_apiserver.sh
 ```
-cat >> /etc/keepalived/check_apiserver.sh <<EOF
+sudo tee -a /etc/keepalived/check_apiserver.sh <<EOF
 #!/bin/sh
 
 errorExit() {
@@ -63,11 +64,11 @@ if ip addr | grep -q 172.16.16.100; then
 fi
 EOF
 
-chmod +x /etc/keepalived/check_apiserver.sh
+sudo chmod +x /etc/keepalived/check_apiserver.sh
 ```
 Create keepalived config /etc/keepalived/keepalived.conf
 ```
-cat >> /etc/keepalived/keepalived.conf <<EOF
+sudo tee -a /etc/keepalived/keepalived.conf <<EOF
 vrrp_script check_apiserver {
   script "/etc/keepalived/check_apiserver.sh"
   interval 3
@@ -98,13 +99,22 @@ EOF
 ```
 ##### Enable & start keepalived service
 ```
-systemctl enable --now keepalived
+sudo systemctl enable --now keepalived
+```
+##### Check keepalived status
+```
+sudo systemctl status keepalived
+```
+
+##### Check more about keepalived events
+```
+sudo journalctl -flu keepalived
 ```
 
 ##### Configure haproxy
 Update **/etc/haproxy/haproxy.cfg**
 ```
-cat >> /etc/haproxy/haproxy.cfg <<EOF
+sudo tee -a /etc/haproxy/haproxy.cfg <<EOF
 
 frontend kubernetes-frontend
   bind *:6443
@@ -126,7 +136,7 @@ EOF
 ```
 ##### Enable & restart haproxy service
 ```
-systemctl enable haproxy && systemctl restart haproxy
+sudo systemctl enable haproxy && systemctl restart haproxy
 ```
 ## Pre-requisites on all kubernetes nodes (masters & workers)
 ##### Disable swap

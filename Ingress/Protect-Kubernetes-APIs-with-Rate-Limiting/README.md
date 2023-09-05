@@ -274,11 +274,11 @@ In the final challenge, you deploy two NGINX Ingress Controllers to eliminate th
 
 First, let’s look at how to address the architectural problem. In the previous challenge, you overwhelmed NGINX Ingress Controller with API requests, which also impacted the app. This happened because a single Ingress controller was responsible for routing traffic to both the web app (Podinfo Frontend) and the API (Podinfo API).
 
-![Shared Ingress](/images/shared_ingress.png)
+![Shared Ingress](/Ingress/Protect-Kubernetes-APIs-with-Rate-Limiting/images/shared_ingress.png)
 
 Running a separate NGINX Ingress Controller pod for each of your services prevents your app from being impacted by too many API requests. This isn’t necessarily required for every use case, but in our simulation it’s easy to see the benefits of running multiple NGINX Ingress Controllers.
 
-![Separate Ingress](/images/two_ingress.png)
+![Separate Ingress](/Ingress/Protect-Kubernetes-APIs-with-Rate-Limiting/images/two_ingress.png)
 
 The second part of the solution, which prevents `Podinfo API` from getting overwhelmed, is to implement rate limiting by using NGINX Ingress Controller as an API gateway.
 
